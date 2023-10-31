@@ -5,8 +5,9 @@ The purpose of those tests is to automatically run SymQEMU on some known binarie
 The directory `binaries` contains a directory for each test binary. A test binary directory contains the following:
 
 - An executable file `binary`
-- A file `input` whose name will be given as first argument to `binary` and whose content will be symbolic
-- A directory `expected_outputs` : the test cases that SymQEMU should generate when called like this : `<symqemu> <path/to/binary> <path/to/input>`, with the content of `input` being symbolic.
+- A file `input` whose path will be given as argument to `binary` and whose content will be symbolic
+- A text file `args` that contains the arguments `binary` will be called with. One of the arguments must be `@@` and it will be replaced with the path of the `input` file.
+- A directory `expected_outputs` : the test cases that SymQEMU should generate when called like this : `<symqemu> <path/to/binary> <args>`, with the content of `input` being symbolic.
 
 The script `test.py` will automatically run SymQEMU on the binaries and check that it gives the correct output.
 
