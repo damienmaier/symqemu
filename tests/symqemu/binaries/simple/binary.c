@@ -14,12 +14,20 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    char input = getc(file_stream);
+    char input1 = getc(file_stream);
+    char input2 = getc(file_stream);
+    char input3 = getc(file_stream);
 
-    if (input == 'z') {
-        puts("you win!");
-    } else {
-        puts("you lose!");
+    if (input1 == 'a') {
+        puts("foo1");
+    }
+
+    if (input2 == 'b') {
+        puts("foo2");
+    }
+
+    if (input3 == 'c') {
+        puts("foo3");
     }
 
 }
