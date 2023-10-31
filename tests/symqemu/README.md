@@ -2,14 +2,18 @@
 
 The purpose of those tests is to automatically run SymQEMU on some known binaries and check that it gives the expected outputs (i.e. check that it generate the expected test cases).
 
+To run the tests, cd into this directory and run:
+
+```
+python3 -m unittest test.py
+```
+
 The directory `binaries` contains a directory for each test binary. A test binary directory contains the following:
 
 - An executable file `binary`
 - A file `input` whose path will be given as argument to `binary` and whose content will be symbolic
 - A text file `args` that contains the arguments `binary` will be called with. One of the arguments must be `@@` and it will be replaced with the path of the `input` file.
 - A directory `expected_outputs` : the test cases that SymQEMU should generate when called like this : `<symqemu> <path/to/binary> <args>`, with the content of `input` being symbolic.
-
-The script `test.py` will automatically run SymQEMU on the binaries and check that it gives the correct output.
 
 ## Adding a binary
 
