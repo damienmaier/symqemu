@@ -88,6 +88,7 @@
 #define DEF_HELPER_BINARY(qemu_name, symcc_name)                               \
     DECL_HELPER_BINARY(qemu_name) {                                            \
         BINARY_HELPER_ENSURE_EXPRESSIONS;                                      \
+        puts(__func__);                                                        \
         return _sym_build_##symcc_name(arg1_expr, arg2_expr);                  \
     }
 
@@ -125,36 +126,42 @@ void *HELPER(sym_neg)(void *expr)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     return _sym_build_neg(expr);
 }
 
 DECL_HELPER_BINARY(andc)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+    puts(__func__);
     return _sym_build_and(arg1_expr, _sym_build_not(arg2_expr));
 }
 
 DECL_HELPER_BINARY(eqv)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+    puts(__func__);
     return _sym_build_not(_sym_build_xor(arg1_expr, arg2_expr));
 }
 
 DECL_HELPER_BINARY(nand)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+    puts(__func__);
     return _sym_build_not(_sym_build_and(arg1_expr, arg2_expr));
 }
 
 DECL_HELPER_BINARY(nor)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+    puts(__func__);
     return _sym_build_not(_sym_build_or(arg1_expr, arg2_expr));
 }
 
 DECL_HELPER_BINARY(orc)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+    puts(__func__);
     return _sym_build_or(arg1_expr, _sym_build_not(arg2_expr));
 }
 
@@ -163,6 +170,7 @@ void *HELPER(sym_not)(void *expr)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     return _sym_build_not(expr);
 }
 
@@ -171,6 +179,7 @@ void *HELPER(sym_muluh_i64)(uint64_t arg1, void *arg1_expr,
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
 
+    puts(__func__);
     assert(_sym_bits_helper(arg1_expr) == 64 &&
            _sym_bits_helper(arg2_expr) == 64);
     void *full_result = _sym_build_mul(_sym_build_zext(arg1_expr, 64),
@@ -183,6 +192,7 @@ void *HELPER(sym_sext)(void *expr, uint64_t target_length)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     size_t current_bits = _sym_bits_helper(expr);
     size_t bits_to_keep = target_length * 8;
     void *shift_distance_expr = _sym_build_integer(
@@ -198,6 +208,7 @@ void *HELPER(sym_zext)(void *expr, uint64_t target_length)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     size_t current_bits = _sym_bits_helper(expr);
     size_t desired_bits = target_length * 8;
 
@@ -211,6 +222,7 @@ void *HELPER(sym_sext_i32_i64)(void *expr)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     assert(_sym_bits_helper(expr) == 32);
     return _sym_build_sext(expr, 32); /* extend by 32 */
 }
@@ -220,6 +232,7 @@ void *HELPER(sym_zext_i32_i64)(void *expr)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     assert(_sym_bits_helper(expr) == 32);
     return _sym_build_zext(expr, 32); /* extend by 32 */
 }
@@ -229,6 +242,7 @@ void *HELPER(sym_trunc_i64_i32)(void *expr)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     assert(_sym_bits_helper(expr) == 64);
     return _sym_build_trunc(expr, 32);
 }
@@ -238,6 +252,7 @@ void *HELPER(sym_bswap)(void *expr, uint64_t length)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
     /* The implementation follows the alternative implementations of
      * tcg_gen_bswap* in tcg-op.c (which handle architectures that don't support
      * bswap directly). */
@@ -410,6 +425,8 @@ DECL_HELPER_BINARY(rotate_left)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
 
+    puts(__func__);
+
     /* The implementation follows the alternative implementation of
      * tcg_gen_rotl_i64 in tcg-op.c (which handles architectures that don't
      * support rotl directly). */
@@ -425,6 +442,8 @@ DECL_HELPER_BINARY(rotate_left)
 DECL_HELPER_BINARY(rotate_right)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+
+    puts(__func__);
 
     /* The implementation follows the alternative implementation of
      * tcg_gen_rotr_i64 in tcg-op.c (which handles architectures that don't
@@ -447,6 +466,7 @@ void *HELPER(sym_extract_i64)(void *expr, uint64_t ofs, uint64_t len)
 {
     if (expr == NULL)
         return NULL;
+    puts(__func__);
 
     return _sym_build_zext(
         _sym_extract_helper(expr, ofs + len - 1, ofs),
@@ -459,6 +479,8 @@ void *HELPER(sym_extract2_i32)(uint32_t ah, void *ah_expr,
 {
     if (ah_expr == NULL && al_expr == NULL)
         return NULL;
+
+    puts(__func__);
 
     if (ah_expr == NULL)
         ah_expr = _sym_build_integer(ah, 32);
@@ -491,6 +513,8 @@ void *HELPER(sym_extract2_i64)(uint64_t ah, void *ah_expr,
 {
     if (ah_expr == NULL && al_expr == NULL)
         return NULL;
+
+    puts(__func__);
 
     if (ah_expr == NULL)
         ah_expr = _sym_build_integer(ah, 64);
@@ -527,6 +551,8 @@ void *HELPER(sym_sextract_i64)(void *expr, uint64_t ofs, uint64_t len)
     if (expr == NULL)
         return NULL;
 
+    puts(__func__);
+
     return _sym_build_sext(
         _sym_extract_helper(expr, ofs + len - 1, ofs),
         _sym_bits_helper(expr) - len);
@@ -537,6 +563,8 @@ void *HELPER(sym_deposit_i32)(uint32_t arg1, void *arg1_expr,
                               uint32_t ofs, uint32_t len)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+
+    puts(__func__);
 
     /* The symbolic implementation follows the alternative concrete
      * implementation of tcg_gen_deposit_i32 in tcg-op.c (which handles
@@ -557,6 +585,8 @@ void *HELPER(sym_deposit_i64)(uint64_t arg1, void *arg1_expr,
                               uint64_t ofs, uint64_t len)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+
+    puts(__func__);
 
     /* The symbolic implementation follows the alternative concrete
      * implementation of tcg_gen_deposit_i64 in tcg-op.c (which handles
@@ -579,6 +609,8 @@ static void *sym_setcond_internal(CPUArchState *env,
                                   uint8_t result_bits)
 {
     BINARY_HELPER_ENSURE_EXPRESSIONS;
+
+    puts(__func__);
 
     void *(*handler)(void *, void*);
     switch (cond) {
@@ -644,17 +676,17 @@ void *HELPER(sym_setcond_i64)(CPUArchState *env,
 
 void HELPER(sym_notify_call)(uint64_t return_address)
 {
-    _sym_notify_call(return_address);
+//    _sym_notify_call(return_address);
 }
 
 void HELPER(sym_notify_return)(uint64_t return_address)
 {
-    _sym_notify_ret(return_address);
+//    _sym_notify_ret(return_address);
 }
 
 void HELPER(sym_notify_block)(uint64_t block_id)
 {
-    _sym_notify_basic_block(block_id);
+//    _sym_notify_basic_block(block_id);
 }
 
 void HELPER(sym_collect_garbage)(void)
