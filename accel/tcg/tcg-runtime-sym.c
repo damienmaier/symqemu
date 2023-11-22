@@ -20,6 +20,8 @@
 #include "exec/cpu_ldst.h"
 #include "qemu/qemu-print.h"
 #include "tcg.h"
+#include "exec/exec-all.h"
+
 
 /* Include the symbolic backend, using void* as expression type. */
 
@@ -651,6 +653,8 @@ void HELPER(sym_notify_return)(uint64_t return_address)
 void HELPER(sym_notify_block)(uint64_t block_id)
 {
     _sym_notify_basic_block(block_id);
+    TranslationBlock *block = (TranslationBlock *) block_id;
+    _sym_trace_execution(block->pc);
 }
 
 void HELPER(sym_collect_garbage)(void)
