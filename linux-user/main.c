@@ -594,6 +594,34 @@ static int parse_args(int argc, char **argv)
     return optind;
 }
 
+
+static void save_memory_areas(void * env, struct image_info * info){
+    FILE* f = fopen("/tmp/symqemu_addresses.json", "w");
+    if (f == NULL) {
+        printf("Error opening addresses file\n");
+        return;
+    }
+
+    const char *format = "{\"name\":\"%s\",\"address\":%lu},\n";
+    fprintf(f, "[\n");
+
+    for(TCGTemp* temp = tcg_ctx->temps; temp != tcg_ctx->temps + tcg_ctx->nb_globals; temp++){
+        if (temp->mem_allocated) {
+            // we do not support memory allocated temps whose base is not env
+            tcg_debug_assert(!temp->indirect_reg);
+            void * temp_mem_address = env + temp->mem_offset;
+            fprintf(f, format, temp->name, temp_mem_address);
+        }
+    }
+    fprintf(f, format, "xmm_t0", env + offsetof(CPUX86State, xmm_t0));
+
+    fprintf(f, format, "stack", info->start_stack);
+
+    fseek(f, -2, SEEK_CUR);
+    fprintf(f, "\n]");
+    fclose(f);
+}
+
 int main(int argc, char **argv, char **envp)
 {
     struct target_pt_regs regs1, *regs = &regs1;
@@ -840,6 +868,9 @@ int main(int argc, char **argv, char **envp)
         }
         gdb_handlesig(cpu, 0);
     }
+
+    save_memory_areas((void *) env, info);
+
     cpu_loop(env);
     /* never exits */
     return 0;
