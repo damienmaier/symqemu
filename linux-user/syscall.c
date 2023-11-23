@@ -99,6 +99,10 @@
 #include <linux/mtio.h>
 #include <linux/fs.h>
 #include <linux/fd.h>
+
+#define SymExpr void*
+#include "RuntimeCommon.h"
+
 #if defined(CONFIG_FIEMAP)
 #include <linux/fiemap.h>
 #endif
@@ -11168,6 +11172,7 @@ static abi_long do_syscall1(CPUArchState *cpu_env, int num, abi_long arg1,
         /* new thread calls */
     case TARGET_NR_exit_group:
         preexit_cleanup(cpu_env, arg1);
+        _sym_finalize_tracing();
         return get_errno(exit_group(arg1));
 #endif
     case TARGET_NR_setdomainname:
