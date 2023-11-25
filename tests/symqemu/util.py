@@ -8,11 +8,15 @@ BINARIES_DIR = pathlib.Path(__file__).parent / "binaries"
 def run_symqemu_on_test_binary(
         binary_name: str,
         qemu_executable: pathlib.Path = SYMQEMU_EXECUTABLE,
+        additional_args: list[str] = None,
         output_dir: pathlib.Path = None
 ) -> None:
     if output_dir is None:
         output_dir = pathlib.Path('/tmp/symqemu_output')
         output_dir.mkdir(exist_ok=True)
+
+    if additional_args is None:
+        additional_args = ''
 
     binary_dir = BINARIES_DIR / binary_name
 
@@ -24,10 +28,7 @@ def run_symqemu_on_test_binary(
 
     binary_args = *map(replace_placeholder_with_input, binary_args),
 
-    command = (
-                  str(qemu_executable),
-                  str(binary_dir / 'binary'),
-              ) + binary_args
+    command = str(qemu_executable), *additional_args.split(), str(binary_dir / 'binary'), *binary_args
 
     environment_variables = {
         'SYMCC_OUTPUT_DIR': str(output_dir),
