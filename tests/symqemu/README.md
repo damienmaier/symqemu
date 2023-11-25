@@ -5,7 +5,7 @@ The purpose of those tests is to automatically run SymQEMU on some known binarie
 To run the tests, cd into this directory and run:
 
 ```
-python3 -m unittest test.py
+python3 -m unittest e2e/test.py
 ```
 
 The directory `binaries` contains a directory for each test binary. A test binary directory contains the following:
