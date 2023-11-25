@@ -23,6 +23,6 @@ if __name__ == '__main__':
 
     output_dir.mkdir()
 
-    util.run_symqemu_on_test_binary(binary_name=binary_name, output_dir=output_dir)
+    util.run_symqemu_on_test_binary(binary_name=binary_name, generated_test_cases_output_dir=output_dir)
 
     print(f"Expected outputs for {binary_name} generated in {output_dir}")

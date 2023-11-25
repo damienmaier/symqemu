@@ -12,12 +12,17 @@ SYMQEMU_TRACE_ADDRESSES_FILE = pathlib.Path('/tmp/symqemu_addresses.json')
 MAX_DISTANCE = 0x10000
 
 
-def build_trace(binary_name: str, qemu_path: pathlib.Path, output_file_path: pathlib.Path):
-    # Make sure that we will get an error if symqemu does not create the trace files
+def build_trace(binary_name: str, qemu_executable: pathlib.Path, output_dir: pathlib.Path):
+    # Make sure that we will get an error if the files are not created
     BACKEND_TRACE_FILE.unlink(missing_ok=True)
     SYMQEMU_TRACE_ADDRESSES_FILE.unlink(missing_ok=True)
+    util.SYMQEMU_RUN_STDOUT_STDERR.unlink(missing_ok=True)
 
-    util.run_symqemu_on_test_binary(binary_name=binary_name, qemu_executable=qemu_path, additional_args='-cpu qemu64')
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    util.run_symqemu_on_test_binary(binary_name=binary_name, qemu_executable=qemu_executable, additional_args='-cpu qemu64 -d op')
+
+    util.SYMQEMU_RUN_STDOUT_STDERR.rename(output_dir / 'stdout_stderr')
 
     with open(BACKEND_TRACE_FILE) as file:
         backend_trace = json.load(file)
@@ -25,7 +30,7 @@ def build_trace(binary_name: str, qemu_path: pathlib.Path, output_file_path: pat
     with open(SYMQEMU_TRACE_ADDRESSES_FILE) as file:
         symqemu_addresses = json.load(file)
 
-    with open(output_file_path, 'w') as output_file:
+    with open(output_dir / 'trace', 'w') as output_file:
         for entry in backend_trace:
             print(f'pc : {hex(entry["pc"])}', file=output_file)
             for address in entry['symbolicAddresses']:
@@ -58,4 +63,4 @@ if __name__ == '__main__':
     parser.add_argument('output', type=pathlib.Path, help='Path to output trace file')
     args = parser.parse_args()
 
-    build_trace(binary_name=args.binary, qemu_path=pathlib.Path(args.qemu), output_file_path=pathlib.Path(args.output))
+    build_trace(binary_name=args.binary, qemu_executable=pathlib.Path(args.qemu), output_dir=pathlib.Path(args.output))

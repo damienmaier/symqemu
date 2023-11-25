@@ -17,7 +17,7 @@ class SymQemuTests(unittest.TestCase):
 
     def run_symqemu_and_assert_correct_result(self, binary_name):
 
-        util.run_symqemu_on_test_binary(binary_name=binary_name, output_dir=self.SYMQEMU_OUTPUT_DIR)
+        util.run_symqemu_on_test_binary(binary_name=binary_name, generated_test_cases_output_dir=self.SYMQEMU_OUTPUT_DIR)
 
         # `filecmp.dircmp` does a "shallow" comparison, but this is not a problem here because
         # the timestamps should always be different, so the actual content of the files will be compared.
