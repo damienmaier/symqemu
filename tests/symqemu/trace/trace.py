@@ -1,66 +1,15 @@
-import argparse
-import json
 import pathlib
-import sys
 
-sys.path.append(str(pathlib.Path(__file__).parent.parent))
-
-import util
-
-BACKEND_TRACE_FILE = pathlib.Path('/tmp/backend_trace.json')
-SYMQEMU_TRACE_ADDRESSES_FILE = pathlib.Path('/tmp/symqemu_addresses.json')
-MAX_DISTANCE = 0x10000
+import data
 
 
-def build_trace(binary_name: str, qemu_executable: pathlib.Path, output_dir: pathlib.Path):
-    # Make sure that we will get an error if the files are not created
-    BACKEND_TRACE_FILE.unlink(missing_ok=True)
-    SYMQEMU_TRACE_ADDRESSES_FILE.unlink(missing_ok=True)
-    util.SYMQEMU_RUN_STDOUT_STDERR.unlink(missing_ok=True)
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+new = data.build_data(
+    binary_name='printf',
+    qemu_executable=pathlib.Path('/home/ubuntu/symqemu-new-version/build/x86_64-linux-user/qemu-x86_64'),
+    additional_args='-cpu qemu64 -d op'
+)
 
-    util.run_symqemu_on_test_binary(binary_name=binary_name, qemu_executable=qemu_executable, additional_args='-cpu qemu64 -d op')
-
-    util.SYMQEMU_RUN_STDOUT_STDERR.rename(output_dir / 'stdout_stderr')
-
-    with open(BACKEND_TRACE_FILE) as file:
-        backend_trace = json.load(file)
-
-    with open(SYMQEMU_TRACE_ADDRESSES_FILE) as file:
-        symqemu_addresses = json.load(file)
-
-    with open(output_dir / 'trace', 'w') as output_file:
-        for entry in backend_trace:
-            print(f'pc : {hex(entry["pc"])}', file=output_file)
-            for address in entry['symbolicAddresses']:
-
-                def distance(area) -> int:
-                    return address - area['address']
-
-                def absolute_distance(area) -> int:
-                    return abs(distance(area))
-
-                def is_close(area) -> bool:
-                    return 0 >= distance(area) >= -MAX_DISTANCE \
-                        if area['name'] == 'stack' \
-                        else 0 <= distance(area) <= MAX_DISTANCE
-
-                close_areas = list(filter(is_close, symqemu_addresses))
-                if close_areas:
-                    closest_area = min(close_areas, key=absolute_distance)
-                    address_to_print = f'{closest_area["name"]}+{hex(distance(closest_area))}'
-                else:
-                    address_to_print = hex(address)
-
-                print(f'    {address_to_print}', file=output_file)
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Build a trace of an execution of symqemu')
-    parser.add_argument('binary', type=str, help='The name of the test binary to run symqemu on')
-    parser.add_argument('qemu', type=str, help='Path to qemu executable')
-    parser.add_argument('output', type=pathlib.Path, help='Path to output trace file')
-    args = parser.parse_args()
-
-    build_trace(binary_name=args.binary, qemu_executable=pathlib.Path(args.qemu), output_dir=pathlib.Path(args.output))
+with open(pathlib.Path(__file__).parent.parent / 'new' / 'stdout_stderr', 'w') as file:
+    for step in new.trace:
+        print(hex(step.pc), file=file)
