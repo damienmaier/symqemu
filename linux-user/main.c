@@ -619,6 +619,8 @@ static void save_memory_areas(void * env, struct image_info * info){
     fprintf(f, format, "xmm_t0", env + offsetof(CPUX86State, xmm_t0));
 
     fprintf(f, format, "stack", info->start_stack);
+    fprintf(f, format, "code", info->start_code);
+    fprintf(f, format, "data", info->start_data);
 
     fseek(f, -2, SEEK_CUR);
     fprintf(f, "\n]");
