@@ -613,6 +613,9 @@ static void save_memory_areas(void * env, struct image_info * info){
             fprintf(f, format, temp->name, temp_mem_address);
         }
     }
+
+    fprintf(f, format, "mxcsr", env + offsetof(CPUX86State, mxcsr));
+    fprintf(f, format, "xmm_regs", env + offsetof(CPUX86State, xmm_regs));
     fprintf(f, format, "xmm_t0", env + offsetof(CPUX86State, xmm_t0));
 
     fprintf(f, format, "stack", info->start_stack);
