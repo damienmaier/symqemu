@@ -98,17 +98,18 @@ class PathConstraint:
 
 
 @dataclasses.dataclass
+class MemoryArea:
+    address: int
+    name: str
+
+
+@dataclasses.dataclass
 class TraceData:
     trace: list[TraceStep]
     symbols: dict[str, Symbol]
     path_constraints: list[PathConstraint]
     debug_text: str
-
-
-@dataclasses.dataclass
-class MemoryArea:
-    address: int
-    name: str
+    memory_areas: list[MemoryArea]
 
 
 MEMORY_AREA_MAX_DISTANCE = 0x100000
@@ -144,7 +145,7 @@ def raw_memory_address_to_named_location(raw_memory_address: int, memory_areas: 
         return \
             abs(distance(memory_area)) < MEMORY_AREA_MAX_DISTANCE \
                 if memory_area.name == 'stack' \
-                else 0 < distance(memory_area) < MEMORY_AREA_MAX_DISTANCE
+                else 0 <= distance(memory_area) < MEMORY_AREA_MAX_DISTANCE
 
     def absolute_distance(memory_area: MemoryArea) -> int:
         return abs(distance(memory_area))
@@ -173,7 +174,8 @@ def convert_path_constraint(raw_path_constraint: RawPathConstraint, symbols: dic
     return PathConstraint(
         symbol=symbols[raw_path_constraint.symbol],
         after_step=trace_steps[raw_path_constraint.after_step],
-        new_input_value=bytes(raw_path_constraint.new_input_value) if raw_path_constraint.new_input_value is not None else None
+        new_input_value=bytes(
+            raw_path_constraint.new_input_value) if raw_path_constraint.new_input_value is not None else None
     )
 
 
@@ -212,7 +214,8 @@ def build_data(
         trace=trace_steps,
         symbols=symbols,
         path_constraints=path_constraints,
-        debug_text=util.SYMQEMU_RUN_STDOUT_STDERR.read_text()
+        debug_text=util.SYMQEMU_RUN_STDOUT_STDERR.read_text(),
+        memory_areas=memory_areas
     )
 
 
