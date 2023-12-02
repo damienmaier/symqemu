@@ -120,6 +120,8 @@ DEF_HELPER_BINARY(xor, xor)
 DEF_HELPER_BINARY(shift_right, logical_shift_right)
 DEF_HELPER_BINARY(arithmetic_shift_right, arithmetic_shift_right)
 DEF_HELPER_BINARY(shift_left, shift_left)
+DEF_HELPER_BINARY(rotate_left, rotate_left)
+DEF_HELPER_BINARY(rotate_right, rotate_right)
 
 void *HELPER(sym_neg)(void *expr)
 {
@@ -402,38 +404,6 @@ void HELPER(sym_store_host)(void *value_expr, void *addr,
                                 uint64_t offset, uint64_t length)
 {
     _sym_write_memory((uint8_t*)addr + offset, length, value_expr, true);
-}
-
-DECL_HELPER_BINARY(rotate_left)
-{
-    BINARY_HELPER_ENSURE_EXPRESSIONS;
-
-    /* The implementation follows the alternative implementation of
-     * tcg_gen_rotl_i64 in tcg-op.c (which handles architectures that don't
-     * support rotl directly). */
-
-    uint8_t bits = _sym_bits_helper(arg1_expr);
-    return _sym_build_or(
-        _sym_build_shift_left(arg1_expr, arg2_expr),
-        _sym_build_logical_shift_right(
-            arg1_expr,
-            _sym_build_sub(_sym_build_integer(bits, bits), arg2_expr)));
-}
-
-DECL_HELPER_BINARY(rotate_right)
-{
-    BINARY_HELPER_ENSURE_EXPRESSIONS;
-
-    /* The implementation follows the alternative implementation of
-     * tcg_gen_rotr_i64 in tcg-op.c (which handles architectures that don't
-     * support rotr directly). */
-
-    uint8_t bits = _sym_bits_helper(arg1_expr);
-    return _sym_build_or(
-        _sym_build_logical_shift_right(arg1_expr, arg2_expr),
-        _sym_build_shift_left(
-            arg1_expr,
-            _sym_build_sub(_sym_build_integer(bits, bits), arg2_expr)));
 }
 
 void *HELPER(sym_extract_i32)(void *expr, uint32_t ofs, uint32_t len)
