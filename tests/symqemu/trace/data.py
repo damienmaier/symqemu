@@ -3,7 +3,9 @@ import enum
 import functools
 import itertools
 import json
+import math
 import pathlib
+import pickle
 
 import cattrs
 
@@ -53,8 +55,16 @@ class SymbolKind(enum.Enum):
 
 
 @dataclasses.dataclass
-class RawSymbol:
+class Operation:
     kind: SymbolKind
+    properties: dict
+
+
+@dataclasses.dataclass
+class RawSymbol:
+    operation: Operation
+    size_bits: int
+    input_byte_dependency: list[int]
     args: list[str]
 
 
@@ -80,7 +90,9 @@ class RawTraceData:
 
 @dataclasses.dataclass
 class Symbol:
-    kind: SymbolKind
+    operation: Operation
+    size_bits: int
+    input_byte_dependency: list[int]
     args: list['Symbol']
 
 
@@ -117,6 +129,18 @@ BACKEND_TRACE_FILE = pathlib.Path('/tmp/backend_trace.json')
 SYMQEMU_TRACE_ADDRESSES_FILE = pathlib.Path('/tmp/symqemu_addresses.json')
 
 
+def convert_operation(raw_operation: Operation, size_bits: int) -> Operation:
+    operation = Operation(
+        kind=SymbolKind(raw_operation.kind),
+        properties=raw_operation.properties
+    )
+
+    if 'value' in operation.properties:
+        operation.properties['value'] = int(operation.properties['value']).to_bytes(math.ceil(size_bits / 8), 'little')
+
+    return operation
+
+
 def convert_symbols(raw_symbols: dict[str, RawSymbol]) -> dict[str, Symbol]:
     symbols = {}
 
@@ -127,7 +151,12 @@ def convert_symbols(raw_symbols: dict[str, RawSymbol]) -> dict[str, Symbol]:
         raw_symbol = raw_symbols[symbol_id]
         args = [recursively_create_symbol(arg) for arg in raw_symbol.args]
 
-        symbol = Symbol(kind=raw_symbol.kind, args=args)
+        symbol = Symbol(
+            operation=convert_operation(raw_symbol.operation, raw_symbol.size_bits),
+            args=args,
+            input_byte_dependency=raw_symbol.input_byte_dependency,
+            size_bits=raw_symbol.size_bits
+        )
         symbols[symbol_id] = symbol
         return symbol
 
@@ -182,7 +211,8 @@ def convert_path_constraint(raw_path_constraint: RawPathConstraint, symbols: dic
 def build_data(
         binary_name: str,
         qemu_executable: pathlib.Path,
-        additional_args: str = ''
+        pickle_destination_file: pathlib.Path,
+        additional_qemu_args: str = ''
 ) -> TraceData:
     # Make sure that we will get an error if the files are not created
     BACKEND_TRACE_FILE.unlink(missing_ok=True)
@@ -192,7 +222,7 @@ def build_data(
     util.run_symqemu_on_test_binary(
         binary_name=binary_name,
         qemu_executable=qemu_executable,
-        additional_args=additional_args
+        additional_args=additional_qemu_args
     )
 
     with open(BACKEND_TRACE_FILE) as file:
@@ -210,7 +240,7 @@ def build_data(
     path_constraints = list(map(functools.partial(convert_path_constraint, symbols=symbols, trace_steps=trace_steps),
                                 raw_trace_data.path_constraints))
 
-    return TraceData(
+    trace_data = TraceData(
         trace=trace_steps,
         symbols=symbols,
         path_constraints=path_constraints,
@@ -218,12 +248,5 @@ def build_data(
         memory_areas=memory_areas
     )
 
-
-if __name__ == '__main__':
-    a = build_data(
-        binary_name='printf',
-        qemu_executable=pathlib.Path('/home/ubuntu/symqemu-new-version/build/x86_64-linux-user/qemu-x86_64'),
-        additional_args='-cpu qemu64 -d op'
-    )
-
-    print(a)
+    with open(pickle_destination_file, 'wb') as file:
+        pickle.dump(trace_data, file)
