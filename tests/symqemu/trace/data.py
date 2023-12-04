@@ -79,6 +79,7 @@ class RawPathConstraint:
     symbol: str
     after_step: int
     new_input_value: list[int] | None
+    taken: bool
 
 
 @dataclasses.dataclass
@@ -107,6 +108,7 @@ class PathConstraint:
     symbol: Symbol
     after_step: TraceStep
     new_input_value: bytes | None
+    taken: bool
 
 
 @dataclasses.dataclass
@@ -204,7 +206,8 @@ def convert_path_constraint(raw_path_constraint: RawPathConstraint, symbols: dic
         symbol=symbols[raw_path_constraint.symbol],
         after_step=trace_steps[raw_path_constraint.after_step],
         new_input_value=bytes(
-            raw_path_constraint.new_input_value) if raw_path_constraint.new_input_value is not None else None
+            raw_path_constraint.new_input_value) if raw_path_constraint.new_input_value is not None else None,
+        taken=raw_path_constraint.taken
     )
 
 
