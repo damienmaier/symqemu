@@ -20,6 +20,9 @@
 
 #include "crypto/aes.h"
 
+#define SymExpr void*
+#include "RuntimeCommon.h"
+
 #if SHIFT == 0
 #define Reg MMXReg
 #define XMM_ONLY(...)
@@ -255,6 +258,7 @@ void glue(helper_pslldq, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  d->B(14) = F(d->B(14), s->B(14));              \
                  d->B(15) = F(d->B(15), s->B(15));              \
                                                         )       \
+            _sym_write_memory((uint8_t *) d, 16, NULL, true);               \
             }
 
 #define SSE_HELPER_W(name, F)                                   \
@@ -270,6 +274,7 @@ void glue(helper_pslldq, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  d->W(6) = F(d->W(6), s->W(6));                 \
                  d->W(7) = F(d->W(7), s->W(7));                 \
                                                         )       \
+            _sym_write_memory((uint8_t *) d, 16, NULL, true);                                                    \
             }
 
 #define SSE_HELPER_L(name, F)                                   \
@@ -281,6 +286,7 @@ void glue(helper_pslldq, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  d->L(2) = F(d->L(2), s->L(2));                 \
                  d->L(3) = F(d->L(3), s->L(3));                 \
                                                         )       \
+            _sym_write_memory((uint8_t *) d, 16, NULL, true);                                                    \
             }
 
 #define SSE_HELPER_Q(name, F)                                   \
@@ -290,6 +296,7 @@ void glue(helper_pslldq, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
         XMM_ONLY(                                               \
                  d->Q(1) = F(d->Q(1), s->Q(1));                 \
                                                         )       \
+            _sym_write_memory((uint8_t *) d, 16, NULL, true);                                                    \
             }
 
 #if SHIFT == 0
@@ -495,6 +502,7 @@ void glue(helper_movl_mm_T0, SUFFIX)(Reg *d, uint32_t val)
 #if SHIFT == 1
     d->Q(1) = 0;
 #endif
+    _sym_write_memory((uint8_t *) d, 16, NULL, true);
 }
 
 #ifdef TARGET_X86_64
@@ -504,6 +512,7 @@ void glue(helper_movq_mm_T0, SUFFIX)(Reg *d, uint64_t val)
 #if SHIFT == 1
     d->Q(1) = 0;
 #endif
+    _sym_write_memory((uint8_t *) d, 16, NULL, true);
 }
 #endif
 
@@ -1188,6 +1197,7 @@ void glue(helper_packssdw, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  r.B(15) = s->B((base << (SHIFT + 2)) + 7);             \
                                                                       ) \
             *d = r;                                                     \
+         _sym_write_memory((uint8_t *) d, 16, NULL, true);              \
     }                                                                   \
                                                                         \
     void glue(helper_punpck ## base_name ## wd, SUFFIX)(CPUX86State *env,\
@@ -1206,6 +1216,7 @@ void glue(helper_packssdw, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  r.W(7) = s->W((base << (SHIFT + 1)) + 3);              \
                                                                       ) \
             *d = r;                                                     \
+            _sym_write_memory((uint8_t *) d, 16, NULL, true);              \
     }                                                                   \
                                                                         \
     void glue(helper_punpck ## base_name ## dq, SUFFIX)(CPUX86State *env,\
@@ -1220,6 +1231,7 @@ void glue(helper_packssdw, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  r.L(3) = s->L((base << SHIFT) + 1);                    \
                                                                       ) \
             *d = r;                                                     \
+        _sym_write_memory((uint8_t *) d, 16, NULL, true);               \
     }                                                                   \
                                                                         \
     XMM_ONLY(                                                           \
@@ -1233,6 +1245,7 @@ void glue(helper_packssdw, SUFFIX)(CPUX86State *env, Reg *d, Reg *s)
                  r.Q(0) = d->Q(base);                                   \
                  r.Q(1) = s->Q(base);                                   \
                  *d = r;                                                \
+                  _sym_write_memory((uint8_t *) d, 16, NULL, true);     \
              }                                                          \
                                                                         )
 
