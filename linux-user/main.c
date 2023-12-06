@@ -690,6 +690,7 @@ static void save_memory_areas(void * env, struct image_info * info){
         }
     }
     fprintf(f, format, "xmm_t0", env + offsetof(CPUX86State, xmm_t0));
+    fprintf(f, format, "xmm_regs", env + offsetof(CPUX86State, xmm_regs));
 
     fprintf(f, format, "stack", info->start_stack);
     fprintf(f, format, "code", info->start_code);
