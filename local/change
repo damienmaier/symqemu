@@ -1,0 +1,518 @@
+/home/ubuntu/symqemu-new-version/build/qemu-x86_64 /home/ubuntu/symqemu-new-version/tests/symqemu/binaries/printf/binary /home/ubuntu/symqemu-new-version/tests/symqemu/binaries/printf/input
+This is SymCC running with the QSYM backend
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000000
+New testcase hex :
+0a616161612025642025642025642025642061616161610a
+New testcase ascii :
+
+aaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000001
+New testcase hex :
+610a0a0af50af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5
+New testcase ascii :
+a
+
+
+�
+������������������
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000002-optimistic
+New testcase hex :
+610a0a0a0a0af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5
+New testcase ascii :
+a
+
+
+
+
+������������������
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000003
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000004
+New testcase hex :
+61f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5
+New testcase ascii :
+a�����������������������
+New testcase hex :
+610a0a0a0af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5
+New testcase ascii :
+a
+
+
+
+�������������������
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000005-optimistic
+New testcase hex :
+61f50a0af50af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f50a
+New testcase ascii :
+a�
+
+�
+�����������������
+
+New testcase hex :
+61f50a0af50af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f50a
+New testcase ascii :
+a�
+
+�
+�����������������
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000006-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000007-optimistic
+New testcase hex :
+61f50a0af50af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f50a
+New testcase ascii :
+a�
+
+�
+�����������������
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000008
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000009-optimistic
+New testcase hex :
+01000a0a000a000000000000000000000000000000000000
+New testcase ascii :
+
+
+
+
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000010-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000011-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000012-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000013-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000014-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000015-optimistic
+New testcase hex :
+61616161612000642025642025642025642061616161610a
+New testcase ascii :
+aaaaa  d %d %d %d aaaaa
+
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000016-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000017-optimistic
+New testcase hex :
+616161616120259b2025642025642025642061616161610a
+New testcase ascii :
+aaaaa %� %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000018-optimistic
+New testcase hex :
+61616161612025002025642025642025642061616161610a
+New testcase ascii :
+aaaaa %  %d %d %d aaaaa
+
+New testcase hex :
+61616161612025582025642025642025642061616161610a
+New testcase ascii :
+aaaaa %X %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000019-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000020-optimistic
+New testcase hex :
+61616161612025582025642025642025642061616161610a
+New testcase ascii :
+aaaaa %X %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000021-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000022-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000023-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000002000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000002000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000024-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000025-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000026-optimistic
+New testcase hex :
+25000000d025000020002d0025642025642061616161610a
+New testcase ascii :
+%   �%    - %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000027-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000028-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000029-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000030-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000031-optimistic
+New testcase hex :
+900030000000000000252500252525250000250025252500
+New testcase ascii :
+� 0      %% %%%%  % %%%
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000032-optimistic
+New testcase hex :
+00000000000000002d082d08082d08080000000025000000
+New testcase ascii :
+          %
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000033-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000034-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000035-optimistic
+New testcase hex :
+61616161612025642000642025642025642061616161610a
+New testcase ascii :
+aaaaa %d  d %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000036-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000037-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000038-optimistic
+New testcase hex :
+616161616120256420257b2025642025642061616161610a
+New testcase ascii :
+aaaaa %d %{ %d %d aaaaa
+
+New testcase hex :
+61616161612025642025002025642025642061616161610a
+New testcase ascii :
+aaaaa %d %  %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000039-optimistic
+New testcase hex :
+61616161612025642025582025642025642061616161610a
+New testcase ascii :
+aaaaa %d %X %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000040-optimistic
+New testcase hex :
+61616161612025642025582025642025642061616161610a
+New testcase ascii :
+aaaaa %d %X %d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000041-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000042-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000043-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000044-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000045-optimistic
+New testcase hex :
+00000000000000000020202000000000202020006161610a
+New testcase ascii :
+                    aaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000046-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000047-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000048-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000049-optimistic
+New testcase hex :
+62259dc80025020072008df257000000c967251025250000
+New testcase ascii :
+b%�� % r ��W   �g%%%
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000050-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000051-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000052-optimistic
+New testcase hex :
+61616161612025642025642000642025642061616161610a
+New testcase ascii :
+aaaaa %d %d  d %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000053-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+616161616120256420256420257b2025642061616161610a
+New testcase ascii :
+aaaaa %d %d %{ %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000054-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000055-optimistic
+New testcase hex :
+61616161612025642025642025582025642061616161610a
+New testcase ascii :
+aaaaa %d %d %X %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000056-optimistic
+New testcase hex :
+61616161612025642025642025582025642061616161610a
+New testcase ascii :
+aaaaa %d %d %X %d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000057-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000058-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000059-optimistic
+New testcase hex :
+25086000250d0000b0410000005a0000c2002500202010a2
+New testcase ascii :
+  �A   Z  � %   �
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000060-optimistic
+New testcase hex :
+200f001a70008812d000254d2500b200fada15f2487ae020
+New testcase ascii :
+  p �� %M% � ���Hz�
+New testcase hex :
+000020000500009200000000000d000025480000ef00000a
+New testcase ascii :
+  %H  �
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000061-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000062-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000063-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000064-optimistic
+New testcase hex :
+61616161612025642025642025642025642061616161610a
+New testcase ascii :
+aaaaa %d %d %d %d aaaaa
+
+New testcase hex :
+252525252525252525252525252525d7d72500d7d7d70025
+New testcase ascii :
+%%%%%%%%%%%%%%%��% ��� %
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000065-optimistic
+New testcase hex :
+61616161612025642025642025642000642061616161610a
+New testcase ascii :
+aaaaa %d %d %d  d aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000066-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000067-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+616161616120256420256420256420257b2061616161610a
+New testcase ascii :
+aaaaa %d %d %d %{ aaaaa
+
+New testcase hex :
+61616161612025642025642025642025582061616161610a
+New testcase ascii :
+aaaaa %d %d %d %X aaaaa
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000068-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000069-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000070-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000071-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000072-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000073-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000074-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000075-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000076-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000077-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000078-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000079-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000080-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000081-optimistic
+New testcase hex :
+0000055702002000082780003ae7350002e0a00800000200
+New testcase ascii :
+  W  '� :�5   
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000082-optimistic
+New testcase hex :
+000000000040002580002500100000002520252548005800
+New testcase ascii :
+     @ %� %    % %%H X
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000083-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000084-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000085-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000086-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000087-optimistic
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000088-optimistic
+New testcase hex :
+000000000000000000000000000000000000000000000000
+New testcase ascii :
+
+[INFO] New testcase: /home/ubuntu/symqemu-new-version/test-outputs/000089-optimistic
+New testcase hex :
+61f50a0af50af5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f50a
+New testcase ascii :
+a�
+
+�
+�����������������
+
+
+Process finished with exit code 0
