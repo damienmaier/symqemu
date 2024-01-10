@@ -109,7 +109,7 @@ def symbolic_trace_subset_analysis(left: list[symcctrace.data.TraceStep],
                 continue
 
 
-def is_ancestor(symbol_a: symcctrace.data.Symbol, symbol_b: symcctrace.data.Symbol) -> bool:
+def is_ancestor(symbol_a: symcctrace.data.Expression, symbol_b: symcctrace.data.Expression) -> bool:
     return symbol_a is symbol_b or any(is_ancestor(symbol_a, parent) for parent in symbol_b.args)
 
 
@@ -145,34 +145,34 @@ if __name__ == '__main__':
     old_dir = pathlib.Path(__file__).parent / 'old'
     new_dir = pathlib.Path(__file__).parent / 'new'
 
+    util.run_symqemu_and_save_trace_data(
+        binary_name='printf',
+        qemu_executable=pathlib.Path('/home/ubuntu/symqemu/x86_64-linux-user/symqemu-x86_64'),
+        destination_directory=old_dir,
+        qemu_additional_args='-d in_asm,op -cpu qemu64'
+    )
+
+    util.run_symqemu_and_save_trace_data(
+        binary_name='printf',
+        qemu_executable=pathlib.Path('/home/ubuntu/symqemu-new-version/build/qemu-x86_64'),
+        destination_directory=new_dir,
+        qemu_additional_args='-d in_asm,op -cpu qemu64'
+    )
+
     # util.run_symqemu_and_save_trace_data(
     #     binary_name='printf',
-    #     qemu_executable=pathlib.Path('/home/ubuntu/symqemu/x86_64-linux-user/symqemu-x86_64'),
-    #     destination_directory=old_dir,
-    #     qemu_additional_args='-d op -cpu qemu64'
-    # )
-    #
-    # util.run_symqemu_and_save_trace_data(
-    #     binary_name='printf',
-    #     qemu_executable=pathlib.Path('/home/ubuntu/symqemu-new-version/build/qemu-x86_64'),
+    #     qemu_executable=pathlib.Path('/home/ubuntu/symqemu-port/build/qemu-x86_64'),
     #     destination_directory=new_dir,
     #     qemu_additional_args='-d op -cpu qemu64'
     # )
 
-    util.run_symqemu_and_save_trace_data(
-        binary_name='printf',
-        qemu_executable=pathlib.Path('/home/ubuntu/symqemu-port/build/qemu-x86_64'),
-        destination_directory=new_dir,
-        qemu_additional_args='-d op -cpu qemu64'
-    )
-
     # with open(old_dir / 'trace.pickle', 'rb') as f:
     #     old_trace_data: symcctrace.TraceData = pickle.load(f)
 
-    with open(new_dir / 'trace.pickle', 'rb') as f:
-        new_trace_data: symcctrace.TraceData = pickle.load(f)
-
-    list_generated_test_cases(new_trace_data)
+    # with open(new_dir / 'trace.pickle', 'rb') as f:
+    #     new_trace_data: symcctrace.TraceData = pickle.load(f)
+    #
+    # list_generated_test_cases(new_trace_data)
 
     # new_trace_data.trace = remove_additional_steps(old_trace_data.trace, new_trace_data.trace)
     # remove_memory_region(new_trace_data.trace, 'xmm_t0')
