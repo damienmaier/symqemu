@@ -179,7 +179,11 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
             /* Accept I/O on the last instruction.  */
             set_can_do_io(db, true);
         }
+
+        gen_helper_sym_trace(tcg_constant_i64(db->pc_next));
+
         ops->translate_insn(db, cpu);
+
 
         /*
          * We can't instrument after instructions that change control

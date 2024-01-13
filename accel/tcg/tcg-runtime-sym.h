@@ -123,6 +123,9 @@ DEF_HELPER_FLAGS_1(sym_notify_block, TCG_CALL_NO_RWG, void, i64)
 /* Garbage collection */
 DEF_HELPER_FLAGS_0(sym_collect_garbage, TCG_CALL_NO_RWG, void)
 
+/* Tracing */
+DEF_HELPER_FLAGS_1(sym_trace, TCG_CALL_NO_WG, void, i64)
+
 
 /* TODO clz, ctz, clrsb, ctpop; vector operations; helpers for atomic operations (?) */
 

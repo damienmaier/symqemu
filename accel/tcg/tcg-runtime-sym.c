@@ -575,8 +575,6 @@ void HELPER(sym_notify_return)(uint64_t return_address)
 void HELPER(sym_notify_block)(uint64_t block_id)
 {
     _sym_notify_basic_block(block_id);
-    TranslationBlock *block = (TranslationBlock *) block_id;
-    _sym_trace_execution(block->pc);
 }
 
 void HELPER(sym_collect_garbage)(void)
@@ -584,3 +582,7 @@ void HELPER(sym_collect_garbage)(void)
     _sym_collect_garbage();
 }
 
+void HELPER(sym_trace)(uint64_t pc)
+{
+    _sym_trace_execution(pc);
+}
