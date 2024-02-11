@@ -1,3 +1,5 @@
+FROM symcc AS symcc
+
 FROM ubuntu:22.04
 
 RUN apt update
@@ -13,6 +15,11 @@ WORKDIR /symqemu_source
 
 # Meson gives an error if symcc is in a subdirectory of symqemu
 RUN mv /symqemu_source/symcc /symcc
+
+# The only symcc artifact needed by symqemu is libSymbolize.so
+# Instead of compiling symcc in this image, we rely on the existing symcc docker image and
+# we just copy the libSymbolize.so at the location where symqemu expects it
+COPY --from=symcc /symcc_build/libSymbolize.so /symcc/build/SymRuntime-prefix/src/SymRuntime-build/libSymRuntime.so
 
 RUN ./configure                                                       \
           --audio-drv-list=                                           \
