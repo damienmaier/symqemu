@@ -5,6 +5,8 @@ SYMQEMU_RUN_STDOUT_STDERR = pathlib.Path('/tmp/symqemu_stdout_stderr')
 SYMQEMU_EXECUTABLE = pathlib.Path(__file__).parent.parent.parent / "build" / "x86_64-linux-user" / "qemu-x86_64"
 BINARIES_DIR = pathlib.Path(__file__).parent / "binaries"
 
+class SymqemuRunFailed(Exception):
+    pass
 
 def run_symqemu(
         binary: pathlib.Path,
@@ -22,13 +24,17 @@ def run_symqemu(
     print(f'with environment variables: {environment_variables}')
 
     with open(SYMQEMU_RUN_STDOUT_STDERR, 'w') as f:
-        subprocess.run(
-            command,
-            env=environment_variables,
-            stdout=f,
-            stderr=subprocess.STDOUT,
-        )
-
+        try:
+            subprocess.run(
+                command,
+                env=environment_variables,
+                capture_output=True,
+                check=True,
+            )
+        except subprocess.CalledProcessError as e:
+            raise SymqemuRunFailed(
+                f'command {e.cmd} failed with exit code {e.returncode} and output: {e.stderr.decode()}'
+            )
 
 def run_symqemu_on_test_binary(
         binary_name: str,
