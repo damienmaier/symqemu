@@ -9,5 +9,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: 'recursive'
-    - run: docker build -t symcc symcc
-    - run: docker build -t symqemu .
+    - uses: docker/build-push-action@v5
+      with:
+        context: symcc
