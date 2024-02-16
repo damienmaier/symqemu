@@ -11,3 +11,5 @@ jobs:
     - uses: docker/build-push-action@v5
       with:
         context: symcc
+        cache-from: type=gha
+        cache-to: type=gha
