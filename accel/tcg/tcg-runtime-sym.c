@@ -612,3 +612,7 @@ void HELPER(sym_collect_garbage)(void)
     _sym_collect_garbage();
 }
 
+void HELPER(sym_trace)(uint64_t pc)
+{
+    _sym_trace_execution(pc);
+}
